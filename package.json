@@ -15,7 +15,7 @@
     "@stripe/stripe-js": "^1.48.0",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
-    "framer-motion": "^10.16.5",
+    "framer-motion": "^10.18.0",
     "mongoose": "^8.0.1",
     "next": "^14.0.3",
     "react": "^18.2.0",

@@ -24,6 +24,10 @@
     letter-spacing: 1px;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 /* PRODUCT DETAILS CAROUSEL STYLING CUSTOMIZATION START */
 .productCarousel.carousel-root {
     display: flex;

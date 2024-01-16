@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { CiSearch } from "react-icons/ci";
 import Wrapper from './Wrapper';
 import Menu from './Menu';
 import MenuMobile from './MenuMobile';
@@ -9,6 +10,7 @@ import { IoMdHeart } from 'react-icons/io';
 import { VscChromeClose } from 'react-icons/vsc';  
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
  
 
 const Header =   (cart) => {
@@ -18,6 +20,7 @@ const Header =   (cart) => {
   const [Number, setNumber] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [search, setsearch] = useState('Search...');
+  const [showsearch, setshowsearch] = useState(false);
  
    
 
@@ -49,8 +52,37 @@ const Header =   (cart) => {
    
 
   return (
-    <div className='bg-white'>
-      <Wrapper className='flex pt-3 pb-2 items-center justify-between right-3'>
+
+    <div  className='bg-white'> 
+{ showsearch &&   <motion.div initial={{y:10,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className=' pt-3 pb-0 justify-between right-3  items-center gap-4 text-black'>
+            <form   onSubmit={(e) => 
+{              e.preventDefault();
+              handleSearch(searchQuery)
+              
+            }
+              } className='flex justify-center  items-center'>
+            
+            <input
+                type='text'
+                placeholder={search}
+                // onClick={()=>{
+                //   setsearch('')   
+                // }}
+                // onDragExit={()=>{ setsearch('Search..')  }}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className='border px-2 border-gray-300  p-1 outline-none'
+              />
+              <input type='submit'
+                
+                className='bg-black border-2-solid-black text-white  px-3 py-1'
+              
+              />
+            </form>
+          </motion.div>}
+
+  {!showsearch&&  
+      <motion.Wrapper initial={{y:5,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className='flex pt-3 pb-1 items-center justify-between right-3'>
 
         {/* Logo of the Store */}
         <Link href={"/"}>
@@ -91,7 +123,7 @@ const Header =   (cart) => {
             />
           ) : (
             <BiMenu
-              className='relative left-12 text-[22px] md:hidden md:text-[28px]'
+              className={`${setsearch}?hidden relative left-12 text-[22px] md:hidden md:text-[28px]`}
               onClick={() => setMobileMenu(true)}
             />
           )}
@@ -100,10 +132,15 @@ const Header =   (cart) => {
           {/* Other items, placed at the right */}
 
           {/* Search Interface */}
-          <div className='flex items-center gap-4 text-black'>
-            <form  onSubmit={(e) => 
+          <CiSearch  onClick={()=>{
+            setshowsearch(true)
+            console.log(showsearch)
+          }}  className='relative left-12 text-[22px] md:hidden md:text-[28px]'/>
+          <div className=' border md:flex hidden  items-center gap-4 text-black'>
+            <form   onSubmit={(e) => 
 {              e.preventDefault();
-              handleSearch(searchQuery)}
+              handleSearch(searchQuery)
+            }
               } className='flex items-center'>
             
             <input
@@ -125,6 +162,7 @@ const Header =   (cart) => {
               />
             </form>
           </div>
+      
 
           {/* Cart Icon */}
           <Link href="/cart">
@@ -140,7 +178,7 @@ const Header =   (cart) => {
             <div className='h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 flex justify-center items-center absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] px-[2px] md:px-[5px]'>46</div>
           </div>
         </div>
-      </Wrapper>
+      </motion.Wrapper>}
     </div>
   );
 };

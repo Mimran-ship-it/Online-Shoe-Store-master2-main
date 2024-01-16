@@ -15,7 +15,7 @@ const [Items, setItems] = useState([]);
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/getProducts');
+        const response = await fetch('/api/getProducts');
         const result = await response.json();
 
         // Ensure the response has a "products" property and it's an array before setting state
@@ -47,7 +47,7 @@ useEffect(() => {
 
     // Pin Code Service Availability 
     const checkServiceAvailability = async () => {
-        let pins = await fetch("http://localhost:3000/api/pincode");
+        let pins = await fetch("/api/pincode");
         let pinJson = await pins.json();
         if (pinJson.includes(+pin)) {
             setService(true)

@@ -42,7 +42,7 @@ const Header =   (cart) => {
  
 
       
-      window.location.replace(`http://localhost:3000/category/${query}?query=${query}`);
+      window.location.replace(`/category/${query}?query=${query}`);
       // setSearchQuery('')
   };
 

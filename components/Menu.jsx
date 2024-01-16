@@ -46,12 +46,12 @@ const Menu = ({ showCatMenu, setShowCatMenu, showSortMenu, setShowSortMenu }) =>
                                 {showCatMenu && (
                                     <ul className='bg-white z-40 top-10 absolute left-4 min-w-[250px] text-black shadow-xl'>
                                         {subMenuData.map((subMenu) => (
-                                            <Link key={subMenu.id} href={`/category/${subMenu.name}`} onClick={() => setShowCatMenu(false)}>
+                                            <a key={subMenu.id} href={`/category/${subMenu.name}`} onClick={() => setShowCatMenu(false)}>
                                                 <li className='cursor-pointer flex justify-between items-center px-3 hover:shadow-sm hover:bg-gray-100 rounded-md'>
                                                     {subMenu.name}
                                                     <span className='text-sm opacity-50 '> {subMenu.doc_count}</span>
                                                 </li>
-                                            </Link>
+                                            </a >
                                         ))}
                                     </ul>
                                 )}

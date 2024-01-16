@@ -17,6 +17,7 @@ const Header =   (cart) => {
 
   const [Number, setNumber] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [search, setsearch] = useState('Search...');
  
    
 
@@ -100,21 +101,29 @@ const Header =   (cart) => {
 
           {/* Search Interface */}
           <div className='flex items-center gap-4 text-black'>
-            <div className='flex items-center'>
-              <input
+            <form  onSubmit={(e) => 
+{              e.preventDefault();
+              handleSearch(searchQuery)}
+              } className='flex items-center'>
+            
+            <input
                 type='text'
-                placeholder=' Search...'
+                placeholder={search}
+                // onClick={()=>{
+                //   setsearch('')   
+                // }}
+                // onDragExit={()=>{ setsearch('Search..')  }}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className='border px-2 border-gray-300 rounded-l-xl p-1 outline-none'
               />
-              <button
-                onClick={() => handleSearch(searchQuery)}
+              <input type='submit'
+                
                 className='bg-black border-2-solid-black text-white rounded-r-xl px-3 py-1'
-              >
-                Search
-              </button>
-            </div>
+              
+                placeholder='Search'
+              />
+            </form>
           </div>
 
           {/* Cart Icon */}

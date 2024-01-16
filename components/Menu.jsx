@@ -76,7 +76,7 @@ const Menu = ({ showCatMenu, setShowCatMenu, showSortMenu, setShowSortMenu }) =>
 
                                             return (
                                                
-                                                    <li onClick={()=>{window.location.replace(`/Sortby/${subSortMenu.name}`)}} className='cursor-pointer flex justify-between items-center   px-3 hover:bg-black/[0.03] rounded-md'>
+                                                    <li key={subSortMenu} onClick={()=>{window.location.replace(`/Sortby/${subSortMenu.name}`)}} className='cursor-pointer flex justify-between items-center   px-3 hover:bg-black/[0.03] rounded-md'>
                                                         {subSortMenu.name}
                                                     </li>
                                                 

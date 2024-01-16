@@ -3,10 +3,10 @@ import Wrapper from './Wrapper';
 import Menu from './Menu';
 import MenuMobile from './MenuMobile';
 import Link from 'next/link';
-import { BiMenu } from 'react-icons/Bi';
-import { BsCart3 } from 'react-icons/Bs';
-import { IoMdHeart } from 'react-icons/Io';
-import { VscChromeClose } from 'react-icons/Vsc'; 
+// import { BiMenu } from 'react-icons/Bi';
+// import { BsCart3 } from 'react-icons/Bs';
+// import { IoMdHeart } from 'react-icons/Io';
+// import { VscChromeClose } from 'react-icons/Vsc';  
 import Image from 'next/image';
 import { useRouter } from 'next/router';
  

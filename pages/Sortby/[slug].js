@@ -25,7 +25,7 @@ const handleSearch = async () => {
       setProduct(result.products)
       console.log(result)
 }if(slug=='Price low to high'){
-    const response = await fetch('/getProducts?sortBy=lowToHigh');
+    const response = await fetch('/api/getProducts?sortBy=lowToHigh');
     const result = await response.json();
     setProduct(result.products)
 }

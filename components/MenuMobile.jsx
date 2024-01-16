@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react';
 
 // importing icons from React
-import { BsChevronDown } from 'react-icons/Bs'
+import { BsChevronDown } from 'react-icons/bs'
 
 
 

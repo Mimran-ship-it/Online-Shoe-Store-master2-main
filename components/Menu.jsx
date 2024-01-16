@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { BsChevronDown } from 'react-icons/Bs';
+import { BsChevronDown } from 'react-icons/bs';
 
 const data = [
     { id: 1, name: 'Home', url: '/' },

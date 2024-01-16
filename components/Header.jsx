@@ -11,6 +11,7 @@ import { VscChromeClose } from 'react-icons/vsc';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import { RxCross1 } from "react-icons/rx";
  
 
 const Header =   (cart) => {
@@ -53,7 +54,7 @@ const Header =   (cart) => {
 
   return (
 
-    <div  className='bg-white'> 
+    <div  className='bg-white w-screen'> 
 { showsearch &&   <motion.div initial={{y:10,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className=' pt-3 pb-0 justify-between right-3  items-center gap-4 text-black'>
             <form   onSubmit={(e) => 
 {              e.preventDefault();
@@ -78,7 +79,10 @@ const Header =   (cart) => {
                 className='bg-black border-2-solid-black text-white  px-3 py-1'
               
               />
+
+            <RxCross1 onClick={()=>{setshowsearch(false)}}  className='ml-10  text-xl'/>
             </form>
+
           </motion.div>}
 
   {!showsearch&&  
@@ -118,25 +122,26 @@ const Header =   (cart) => {
         <div className='flex items-center gap-6 text-black'>
           {mobileMenu ? (
             <VscChromeClose
-              className=' relative text-[22px] left-12 md:hidden md:text-[28px]'
+              className=' relative text-[22px] left-12 lg:hidden md:text-[28px]'
               onClick={() => setMobileMenu(false)}
             />
           ) : (
+           <div className='flex mr-10'>
             <BiMenu
-              className={`${setsearch}?hidden relative left-12 text-[22px] md:hidden md:text-[28px]`}
+              className={`${setsearch}?hidden relative left-12 text-[22px] lg:hidden md:text-[28px]`}
               onClick={() => setMobileMenu(true)}
-            />
+            /><CiSearch  onClick={()=>{
+              setshowsearch(true)
+              console.log(showsearch)
+            }}  className='relative ml-5 left-12 text-[22px] lg:hidden md:text-[28px]'/></div>
           )}
 
 
           {/* Other items, placed at the right */}
 
           {/* Search Interface */}
-          <CiSearch  onClick={()=>{
-            setshowsearch(true)
-            console.log(showsearch)
-          }}  className='relative left-12 text-[22px] md:hidden md:text-[28px]'/>
-          <div className=' border md:flex hidden  items-center gap-4 text-black'>
+          
+          <div className=' border lg:flex hidden  items-center gap-4 text-black'>
             <form   onSubmit={(e) => 
 {              e.preventDefault();
               handleSearch(searchQuery)
@@ -165,18 +170,15 @@ const Header =   (cart) => {
       
 
           {/* Cart Icon */}
-          <Link href="/cart">
-            <div className='w-8 md:w-12 h-8 mr-2 md:h-12 rounded-full flex justify-center left-16 items-center hover:bg-gray-200 hover:shadow-lg relative cursor-pointer'>
+         {!mobileMenu&& <Link href="/cart">
+            <div className='w-8 md:w-12 h-8 mr-2 md:h-12 rounded-full flex justify-center  items-center hover:bg-gray-200 hover:shadow-lg relative cursor-pointer'>
               <BsCart3 className='text-[15px] md:text-[20px]' />
               <div className='h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 flex justify-center items-center absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] px-[2px] md:px-[5px]'>{Number}</div>
             </div>
           </Link>
-
+}
           {/* Heart Icon */}
-          <div className='w-8 md:w-12 h-8 md:h-12 rounded-full flex left-10 justify-center items-center hover:shadow-lg hover:bg-gray-200 relative cursor-pointer'>
-            <IoMdHeart className='text-[20px] md:text-[24px]' />
-            <div className='h-[14px] md:h-[18px] min-w-[14px] md:min-w-[18px] rounded-full bg-red-600 flex justify-center items-center absolute top-1 left-5 md:left-7 text-white text-[10px] md:text-[12px] px-[2px] md:px-[5px]'>46</div>
-          </div>
+         
         </div>
       </motion.Wrapper>}
     </div>

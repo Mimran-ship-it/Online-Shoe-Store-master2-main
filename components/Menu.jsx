@@ -27,7 +27,7 @@ const subSortData = [
 const Menu = ({ showCatMenu, setShowCatMenu, showSortMenu, setShowSortMenu }) => {
     return (
         <>
-            <ul className='hidden md:flex items-center font-medium text-black '>
+            <ul className='hidden lg:flex items-center font-medium text-black '>
                 {data.map((item) => (
                     <React.Fragment key={item.id}>
                         {item?.subMenu && (

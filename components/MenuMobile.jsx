@@ -32,7 +32,7 @@ const MenuMobile = ({ showCatMenu, setShowCatMenu, setMobileMenu }) => {
     return (
         <div >
             <motion.ul initial={{y:10,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}}
-             className=' flex flex-col z-40 md:hidden absolute top-[50px] font-medium left-0 w-full h-[calc(100vh-50px)] text-black bg-white border-t'>
+             className=' flex flex-col z-40 lg:hidden absolute top-[50px] font-medium left-0 w-full h-[calc(100vh-50px)] text-black bg-white border-t'>
                 {
                     data.map((item) => {
                         return (

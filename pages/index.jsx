@@ -9,7 +9,7 @@ export default function Home() {
   const [ref, inView] = useInView();
   return (
     
-    <main className='overflow-x-hidden z-40'>
+    <main className='overflow-x-hidden w-screen z-40'>
 
       <HeroBanner />
 

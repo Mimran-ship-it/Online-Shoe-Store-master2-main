@@ -167,9 +167,9 @@ Items.map((key)=>{
                             {!pin && <div className='text-lg font-semibold'>Enter Postal Code Address</div>}
                             <div className='my-4 '>
 
-                                <form onSubmit={(e) => { e.preventDefault() }} method="post">
-                                    <input onChange={onChangePin} type="text" placeholder='Enter your Pincode' className='border px-3 py-4 rounded-3xl mr-2 border-black' />
-                                    <button onClick={checkServiceAvailability} className='bg-black border border-black text-white text-md px-16 py-4 rounded-3xl font-md transition-transform active:scale-95 hover:opacity-75  '>Check</button>
+                                <form onSubmit={(e) => { e.preventDefault() }} className='mb-8' method="post">
+                                    <input onChange={onChangePin} type="text" placeholder='Enter your Pincode' className='border px-3 sm:py-4 py-3 rounded-3xl mr-2 border-black' />
+                                    <button onClick={checkServiceAvailability} className='bg-black border border-black text-white text-md px-6 py-2 sm:px-16 sm:py-4 rounded-3xl font-md transition-transform active:scale-95 hover:opacity-75  '>Check</button>
                                 </form>
 
                             </div>

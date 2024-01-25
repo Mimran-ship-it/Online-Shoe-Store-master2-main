@@ -22,6 +22,7 @@ const Header =   (cart) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [search, setsearch] = useState('Search...');
   const [showsearch, setshowsearch] = useState(false);
+  const [repetation, setrepetation] = useState(0);
  
    
 
@@ -36,26 +37,49 @@ const Header =   (cart) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
+  const [suggestions, setSuggestions] = useState(undefined);
 
   const router = useRouter(); // Use the useRouter hook to get the router object
-  const { slug } = router.query;
+
 
   const handleSearch = async (query) => {
-    // logic to handle search
+    // logic to handle search 
     // console.log('Search query:', query);
  
-
       
       window.location.replace(`/category/${query}?query=${query}`);
       // setSearchQuery('')
   };
+  const searchSuggestion = async (query) => {
+    // logic to handle search 
+    // console.log('Search query:', query);
+    const response = await fetch('/api/getProducts');
+    const result = await response.json();
 
+    // Filter products based on the search query
+    const filteredResults = result.products.filter((product) =>{
+        console.log(query)
+        if(query!='')
+        {console.log('very tur')
+          return product.title.toLowerCase().includes(query?.toLowerCase())}
+      }
+    );
+    setSuggestions(filteredResults)
+      
+      // setSearchQuery('')
+  };
+
+    const [isClient, setIsClient] = useState(false)
+   
+    useEffect(() => {
+      setIsClient(true)
+    }, [])
    
 
   return (
 
-    <div  className='bg-white w-screen'> 
-{ showsearch &&   <motion.div initial={{y:10,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className=' pt-3 pb-0 justify-between right-3  items-center gap-4 text-black'>
+    <div  className='bg-white w-screen '> 
+{ (isClient&&showsearch)&&   <motion.div initial={{y:10,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className=' pt-3 pb-0 justify-between right-3  items-center gap-4 text-black'>
             <form   onSubmit={(e) => 
 {              e.preventDefault();
               handleSearch(searchQuery)
@@ -71,22 +95,39 @@ const Header =   (cart) => {
                 // }}
                 // onDragExit={()=>{ setsearch('Search..')  }}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className='border px-2 border-gray-300  p-1 outline-none'
+                onChange={(e) => {setSearchQuery(e.target.value)
+                searchSuggestion(e.target.value)       
+                if(e.target.value==''){
+                  console.log(true)
+setSuggestions(undefined)
+                }         
+                }}
+                className='border relative border-gray-300  p-1 outline-none'
               />
+             {suggestions&&<div className='bg-white max-h-60 overflow-y-auto z-40 top-12 absolute rounded-lg text-black shadow-xl'>
+              
+              {suggestions?.map((keys)=>{
+              
+                return(
+                  <>
+               <div onClick={()=>{window.location.replace(`/product/${keys._id}`);}} className='px-3 cursor-pointer flex justify-between mb-2 hover:bg-gray-100 '>
+                    <div>{keys.title}</div><img className='w-20' src={`/productIamages/${keys.img}/thumbnail.webp`} alt="" /> </div>
+                  </>
+                )
+              })}</div>}
               <input type='submit'
                 
                 className='bg-black border-2-solid-black text-white  px-3 py-1'
               
               />
 
-            <RxCross1 onClick={()=>{setshowsearch(false)}}  className='ml-10  text-xl'/>
+            <RxCross1 onClick={()=>{setshowsearch(false); setSearchQuery(''); setSuggestions(undefined)} }  className='ml-10  text-xl'/>
             </form>
 
           </motion.div>}
 
-  {!showsearch&&  
-      <motion.Wrapper initial={{y:5,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className='flex pt-3 pb-1 items-center justify-between right-3'>
+  {(isClient&&!showsearch)&&  
+      <motion.wrapper initial={{y:5,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className='flex pt-3 pb-1 items-center justify-between mx-6'>
 
         {/* Logo of the Store */}
         <Link href={"/"}>
@@ -126,13 +167,12 @@ const Header =   (cart) => {
               onClick={() => setMobileMenu(false)}
             />
           ) : (
-           <div className='flex mr-10'>
+           <div className='flex mr-10  lg:mr-0'>
             <BiMenu
               className={`${setsearch}?hidden relative left-12 text-[22px] lg:hidden md:text-[28px]`}
               onClick={() => setMobileMenu(true)}
             /><CiSearch  onClick={()=>{
               setshowsearch(true)
-              console.log(showsearch)
             }}  className='relative ml-5 left-12 text-[22px] lg:hidden md:text-[28px]'/></div>
           )}
 
@@ -140,7 +180,6 @@ const Header =   (cart) => {
           {/* Other items, placed at the right */}
 
           {/* Search Interface */}
-          
           <div className=' border lg:flex hidden  items-center gap-4 text-black'>
             <form   onSubmit={(e) => 
 {              e.preventDefault();
@@ -149,16 +188,32 @@ const Header =   (cart) => {
               } className='flex items-center'>
             
             <input
-                type='text'
+                type='search'
                 placeholder={search}
                 // onClick={()=>{
                 //   setsearch('')   
                 // }}
                 // onDragExit={()=>{ setsearch('Search..')  }}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className='border px-2 border-gray-300 rounded-l-xl p-1 outline-none'
+                onChange={(e) => {
+                  setSearchQuery(e.target.value)
+                searchSuggestion(e.target.value)
+                if(e.target.value==''){
+                  console.log(true)
+setSuggestions(undefined)
+                }
+                }}
+                className='border px-2 relative border-gray-300 rounded-l-xl p-1 outline-none'
               />
+               {suggestions&&<div className='bg-white max-h-72 overflow-y-auto z-40 top-16 absolute  text-black shadow-xl'>{suggestions?.map((keys)=>{
+              // 
+                return(
+                  <>
+                  <div onClick={()=>{window.location.replace(`/product/${keys._id}`);}} className='px-3 cursor-pointer flex justify-between mb-2 '>
+                    <div className='text-gray-500 hover:text-black'>{keys.title}</div><img className='w-20' src={`/productIamages/${keys.img}/thumbnail.webp`} alt="" /> </div>
+                  </>
+                )
+              })}</div>}
               <input type='submit'
                 
                 className='bg-black border-2-solid-black text-white rounded-r-xl px-3 py-1'
@@ -180,7 +235,8 @@ const Header =   (cart) => {
           {/* Heart Icon */}
          
         </div>
-      </motion.Wrapper>}
+      </motion.wrapper>}
+      
     </div>
   );
 };

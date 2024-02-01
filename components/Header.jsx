@@ -79,21 +79,17 @@ const Header =   (cart) => {
   return (
 
     <div  className='bg-white w-screen '> 
-{ (isClient&&showsearch)&&   <motion.div initial={{y:10,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className=' pt-3 pb-0 justify-between right-3  items-center gap-4 text-black'>
+{ (isClient&&showsearch)&&   <motion.div initial={{y:-30}} animate={{y:0}} transition={{duration:.3}} className=' pt-3 pb-3 justify-between right-3  items-center gap-4 text-black'>
             <form   onSubmit={(e) => 
 {              e.preventDefault();
               handleSearch(searchQuery)
               
             }
-              } className='flex justify-center  items-center'>
+              } className='flex justify-center   items-center'>
             
             <input
                 type='text'
                 placeholder={search}
-                // onClick={()=>{
-                //   setsearch('')   
-                // }}
-                // onDragExit={()=>{ setsearch('Search..')  }}
                 value={searchQuery}
                 onChange={(e) => {setSearchQuery(e.target.value)
                 searchSuggestion(e.target.value)       
@@ -102,7 +98,7 @@ const Header =   (cart) => {
 setSuggestions(undefined)
                 }         
                 }}
-                className='border relative border-gray-300  p-1 outline-none'
+                className='border ml-2 sm:w-4/12 w-6/12 relative border-gray-600 rounded-lg p-1 outline-none'
               />
              {suggestions&&<div className='bg-white max-h-60 overflow-y-auto z-40 top-12 absolute rounded-lg text-black shadow-xl'>
               
@@ -117,17 +113,17 @@ setSuggestions(undefined)
               })}</div>}
               <input type='submit'
                 
-                className='bg-black border-2-solid-black text-white  px-3 py-1'
+                className='bg-black ml-1 sm:w-2/12 w-3/12  rounded-lg text-white  px-3 py-1'
               
               />
 
-            <RxCross1 onClick={()=>{setshowsearch(false); setSearchQuery(''); setSuggestions(undefined)} }  className='ml-10  text-xl'/>
+            <RxCross1 onClick={()=>{setshowsearch(false); setSearchQuery(''); setSuggestions(undefined)} }  className='ml-6  text-xl'/>
             </form>
 
           </motion.div>}
 
   {(isClient&&!showsearch)&&  
-      <motion.wrapper initial={{y:5,scale:0}} animate={{x:0,y:0, scale:1}} transition={{duration:.4}} className='flex pt-3 pb-1 items-center justify-between mx-6'>
+      <motion.wrapper initial={{y:-30}} animate={{y:0}} transition={{duration:.3}} className='flex pt-3 pb-1 items-center justify-between mx-6'>
 
         {/* Logo of the Store */}
         <Link href={"/"}>
@@ -155,15 +151,21 @@ setSuggestions(undefined)
             setShowCatMenu={setShowCatMenu}
             setMobileMenu={setMobileMenu}
             showCatMenu={showCatMenu}
+            showSortMenu={showSortMenu}
+          setShowSortMenu={setShowSortMenu}
+            
           />
         )}
+        
+       
+        
 
 
         {/* Mobile Menu Icon */}
         <div className='flex items-center gap-6 text-black'>
           {mobileMenu ? (
             <VscChromeClose
-              className=' relative text-[22px] left-12 lg:hidden md:text-[28px]'
+              className='me-8 relative text-[22px] left-12 lg:hidden md:text-[28px]'
               onClick={() => setMobileMenu(false)}
             />
           ) : (
@@ -203,7 +205,7 @@ setSuggestions(undefined)
 setSuggestions(undefined)
                 }
                 }}
-                className='border px-2 relative border-gray-300 rounded-l-xl p-1 outline-none'
+                className=' px-2 relative border border-gray-600 rounded-lg p-1 outline-none'
               />
                {suggestions&&<div className='bg-white max-h-72 overflow-y-auto z-40 top-16 absolute  text-black shadow-xl'>{suggestions?.map((keys)=>{
               // 
@@ -216,7 +218,7 @@ setSuggestions(undefined)
               })}</div>}
               <input type='submit'
                 
-                className='bg-black border-2-solid-black text-white rounded-r-xl px-3 py-1'
+                className='bg-black  text-white rounded-lg px-3 ml-1 py-1 '
               
                 placeholder='Search'
               />

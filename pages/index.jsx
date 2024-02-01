@@ -1,7 +1,6 @@
 //  import Header from "@/pages/header";
 
 import HeroBanner from "@/components/HeroBanner";
-import Document from "next/document";
 import ProductCard from "@/components/ProductCard";
 import Wrapper from "@/components/Wrapper";
 import { useInView } from 'react-hook-inview'
